@@ -7,6 +7,10 @@ require "db.php";
 if (isset($_POST['signup'])) {
     if ($_POST['password1'] != $_POST['password2']) {
         $err[] ="Пароли не совпадают";
+    } else {
+        if (isset($_POST['signup'])) {
+         mysqli_query ($con, "SELECT * FROM users WHERE email =".$_POST['email']);
+        $err[] ="Такой пользователь уже существует!";
     }
     if (empty($err)) {
      $users = R::dispense('users');
@@ -17,8 +21,10 @@ if (isset($_POST['signup'])) {
      header('locftion: signup.php'); 
      echo "Регистрация прошла успешно!<script>window.location = 'login.php';</script>";
 }
+
 }
         }
+ }
  }
 ?>
 <!DOCTYPE html>
