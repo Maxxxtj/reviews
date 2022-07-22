@@ -32,16 +32,23 @@ if (isset($_POST['signup'])) {
     <head>
         <meta charset="UTF-8">
         <title>Регистрация</title>
+        
     </head>
     <body> 
         <?= '<div style="color: red">'.$err1.'</div>' ?>
-        <form action="" method="POST">
+        <form  action="" method="POST">
+            
             <input type="text" name="name" placeholder="Имя"><br><br>
             <input type="email" name="email" placeholder="Email"><br><br>
             <input type="password" name="password1" placeholder="Пароль"><br><br>
             <input type="password" name="password2" placeholder="Подтверждение пароля"><br><br>
-            <input type="submit" name="signup">
+            <input id="comment-btn" type="submit" name="signup" value="Зарегистрироваться"> 
+            
         </form>
+        <hr>
+        
        <?php if(!empty($err)) echo '<div style="color: red;">'.array_shift($err).'</div>'; ?>
+ 
+            
     </body>
 </html>

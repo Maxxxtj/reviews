@@ -4,7 +4,8 @@ require "db.php";
 if(isset($_POST['log'])){
     $error=array();
     $user = R::findOne('users','email=?', array($_POST['email']));
-    if ($user) {
+    $secret = htmlspecialchars(trim($_POST['secret']));
+    if ($user) {    
     if (password_verify($_POST['password'], $user->password)) {
         $_SESSION['logged_user'] = $user;
         header('locftion: /');
@@ -16,6 +17,10 @@ if(isset($_POST['log'])){
  else {
     $error[]="Пользователь не найден!";
 }
+/*if($secret != 'secretkey'){
+    return false;
+}*/
+
 
 }
 
@@ -30,11 +35,17 @@ if(isset($_POST['log'])){
         <form action="" method="POST">
         <input type="text" name="email" placeholder="Email"><br><br>
             <input type="password" name="password" placeholder="Пароль"><br><br>
-            <input type="submit" name="log"><br><br>
+            <input type="hidden" id="secret" name="secret" value=" ">
+            <input type="submit" name="log" value="Войти"><br><br>
             </form>
          <?php if(!empty($error)) echo '<div style="color: red;">'.array_shift($error).'</div>'; ?>
+        
+        <script>
+         /*   let secret = document.querySelector('#secret'); 
+            document.querySelector('.btn').onclick = function () {
+                secret.value='secretkey';
+            } */
+        </script>
         <a href="otziv.php"> </a>
-        
-        
     </body>
 </html>
