@@ -17,10 +17,6 @@ if(isset($_POST['log'])){
  else {
     $error[]="Пользователь не найден!";
 }
-/*if($secret != 'secretkey'){
-    return false;
-}*/
-
 
 }
 
@@ -40,12 +36,6 @@ if(isset($_POST['log'])){
             </form>
          <?php if(!empty($error)) echo '<div style="color: red;">'.array_shift($error).'</div>'; ?>
         
-        <script>
-         /*   let secret = document.querySelector('#secret'); 
-            document.querySelector('.btn').onclick = function () {
-                secret.value='secretkey';
-            } */
-        </script>
         <a href="otziv.php"> </a>
     </body>
 </html>
