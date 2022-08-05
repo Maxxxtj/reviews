@@ -44,16 +44,54 @@ $con->close();
     <head>
         <meta charset="UTF-8">
         <title>Регистрация</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://www.google.com/recaptcha/api.js"></script>
     </head>
     <body> 
         <?= '<div style="color: red">'.$err1.'</div>' ?>
-        <form action="" method="POST">
+        <form id="feedBackForm" action="" method="POST">
             <input type="text" name="name" placeholder="Имя"><br><br>
             <input type="email" name="email" placeholder="Email"><br><br>
             <input type="password" name="password1" placeholder="Пароль"><br><br>
             <input type="password" name="password2" placeholder="Подтверждение пароля"><br><br>
-            <input type="submit" name="signup" value="Зарегистрироваться">
+            <input type="submit" name="signup" value="Зарегистрироваться"><br><br>
+            <div class="g-recaptcha" data-sitekey="6Le_CUMhAAAAAFeQ2EcIcxM3dFYlyjblmGpOaLE8"></div>
+            <div class="text-danger" id="recaptchaError"></div>
+            
+            
         </form>
        <?php if(!empty($err)) echo '<div style="color: red;">'.array_shift($err).'</div>'; ?>
+        <script>
+        $(document).ready(function() {
+
+            $("#feedBackForm").on("submit", function(event) {
+                event.preventDefault()
+                var captcha = grecaptcha.getResponse();
+
+                if (!captcha.length) {
+                    $('#recaptchaError').text('* Вы не прошли проверку капчей');
+                } else {
+                    /*$('#recaptchaError').text('');*/
+
+                    let dataForm = $(this).serialize()
+
+                    $.ajax({
+                        url: '/form.php',
+                        method: 'post',
+                        dataType: 'html',
+                        data: dataForm,
+                        success: function(data){
+                            console.log(data);
+                            grecaptcha.reset();
+                    }
+                });
+
+            }
+    
+        })
+
+    })
+
+       </script>
     </body>
 </html>

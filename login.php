@@ -18,6 +18,7 @@ if(isset($_POST['log'])){
     $error[]="Пользователь не найден!";
 }
 
+
 }
 
 ?>
@@ -29,13 +30,12 @@ if(isset($_POST['log'])){
     </head>
     <body>  
         <form action="" method="POST">
-        <input type="text" name="email" placeholder="Email"><br><br>
+        <input type="email" name="email" placeholder="Email"><br><br>
             <input type="password" name="password" placeholder="Пароль"><br><br>
-            <input type="hidden" id="secret" name="secret" value=" ">
             <input type="submit" name="log" value="Войти"><br><br>
             </form>
          <?php if(!empty($error)) echo '<div style="color: red;">'.array_shift($error).'</div>'; ?>
         
-        <a href="otziv.php"> </a>
+         <a href="otziv.php"> </a>
     </body>
 </html>

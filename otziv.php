@@ -23,16 +23,15 @@
     <head>
         <meta charset="UTF-8">
         <title>Отзывы</title>
-       
     </head>
     <body>  
         <?= '<div style="color: red">'.$err.'</div>' ?>
-        <?php if(isset($_SESSION['logged_user'])):  ?>
-        <form id="add-comment" action="add-comment.php" method="POST">
+        <form  action="" method="POST">
             <input type="text" name="name" placeholder="Имя"><br><br>
-            <input type="text" name="email" placeholder="e-mail"><br><br>
+            <input type="email" name="email" placeholder="e-mail"><br><br>
             <input type="text" name="message" placeholder="Отзыв"><br><br>
-            <input id="comment-btn1" type="submit" name="signup" value="Опубликовать">
+                       
+            <input type="submit" name="send">
             <?= '<div style="color: red">'.$err.'</div>' ?>
         <?php
         echo '<br><a href="logout.php">Выйти</a>'
@@ -44,7 +43,7 @@
         <div class="koment"> 
             <hr>
             <div class="name"><?= $kom['name']?> </div>
-            <div class "i">
+            <div class = "i">
                 <?=$kom['date'] ?>
             </div>
             <div class="message"><?= $kom['message']?> </div>  
@@ -52,10 +51,6 @@
             
         </div> 
         <?php } ?>
-         <?php else: ?>
-        <div class="form">
-            <a href="login.php">Войдите</a> или <a href="signup.php">зарегистрируйтесь</a>
-        </div>
-        <?php endif ?>
+       
     </body>
 </html>
